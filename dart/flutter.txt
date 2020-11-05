@@ -1,0 +1,21 @@
+//Food_with開発のメモ
+
+
+//Plan Widget　のデザイン決め
+
+use Card class
+
+Card(
+  // タップした時に指定した色の波紋がでる
+  child: InkWell(
+    splashColor: Colors.red,
+    onTap: () {
+      print('Card tapped.');
+    },
+    child: Container(
+      width: 200,
+      height: 100,
+      child: Text('A card that can be tapped'),
+    ),
+  ),
+),
