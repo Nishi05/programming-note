@@ -1,10 +1,63 @@
 //Food_with開発のメモ
+// alt + optionが効かなくなったらIDEのプラグイン(Flutter+Dart)をアップグレードする
+// Android Studio <- AS
+// < <-Widget Classに添付する
+// AS console に表示させるためには　debugPrint() [print()でも可]
+/// <- 大まかなカテゴリーわけ
+
+///基本知識
+<MaterialApp Class
+MaterialApp (
+  //アプリ全体のテーマ（カラーなど）を決められる
+  theme: ThemeData(
+    brightness: Brightness.dark,
+    primaryColor: Colors.blueGrey
+  ),
+  //画面遷移のためのルートを設定できる
+  routes: <String, WidgetBuilder>{
+    '/': (BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Home Route'),
+        ),
+      );
+    },
+    '/about': (BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('About Route'),
+        ),
+      );
+     }
+ },
+)
+
+<Container Class
+Container(
+  //子要素の配置を揃えることができる
+  alignment: Alignment.center,
+);
+
+<Row Class
+//横並び
+Row(
+  //横の配置指定 start center end
+  mainAxisAlignment: MainAxisAlignment.start,
+  //縦の配置指定 start center end
+  crossAxisAlignment: CrossAxisAlignment.start,
+);
+<Column Class
+//縦並び
+Column(
+  //縦の配置指定 start center end
+  mainAxisAlignment: MainAxisAlignment.start,
+  //横の配置指定 start center end
+  crossAxisAlignment: CrossAxisAlignment.start,
+);
 
 
 //Plan Widget　のデザイン決め
-
-use Card class
-
+<Card Class
 Card(
   // タップした時に指定した色の波紋がでる
   child: InkWell(
@@ -12,11 +65,21 @@ Card(
     onTap: () {
       print('Card tapped.');
     },
+    //子要素にContainerなどをつけてデザインする
     child: Container(
       width: 200,
       height: 100,
       child: Text('A card that can be tapped'),
     ),
   ),
-),
-//test2
+);
+
+<Expanded Class
+//Row,Column内で使用するとExpanded内の子要素が固定の比率で表示される
+Expanded ()
+
+<Flexible Class
+//Row,Column内で使用するとExpanded内の子要素が自身の幅に応じて柔軟な比率で表示される
+Flexible ()
+
+///
