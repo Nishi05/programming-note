@@ -55,7 +55,19 @@ Column(
   crossAxisAlignment: CrossAxisAlignment.start,
 );
 
+<Text Class
+//テキスト
+Text(
+//表示するテキスト
+'',
+//スタイルを変更できる
+style: TextStyle(
+color:
+fontWight:
+ext...
+);
 
+);
 //Plan Widget　のデザイン決め
 <Card Class
 Card(
