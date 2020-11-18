@@ -13,24 +13,30 @@ MaterialApp (
     brightness: Brightness.dark,
     primaryColor: Colors.blueGrey
   ),
-  //画面遷移のためのルートを設定できる
-  routes: <String, WidgetBuilder>{
-    '/': (BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('Home Route'),
-        ),
-      );
-    },
-    '/about': (BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('About Route'),
-        ),
-      );
-     }
- },
+  //初期画面を設定
+  routes: Routes.route()
+  //Navigator.of(context).pushNamed('settings.name')で画面遷移を指定できるように設定
+  onGenerateRoute: (settings) => Routes.onGenerateRoute(settings),
 )
+
+class Routes {
+  //初期ルートを設定
+  static dynamic route() {
+    return {'/': (BuildContext context) => PlanPage()};
+  }
+  //switch文で画面遷移を管理
+  static Route onGenerateRoute(RouteSettings settings) {
+    debugPrint(settings.name);
+    switch (settings.name) {
+      case "CreatePlan":
+        return MaterialPageRoute(
+           builder: (context) => ComposePlanPage(),
+           //指定することにより下から上に画面がフルスクリーンで出てくる
+           fullscreenDialog: true,
+         );
+    }
+  }
+}
 
 <Container Class
 Container(
@@ -68,7 +74,7 @@ ext...
 );
 
 );
-//Plan Widget　のデザイン決め
+///Plan Widget　のデザイン決め
 <Card Class
 Card(
   // タップした時に指定した色の波紋がでる
@@ -94,4 +100,62 @@ Expanded ()
 //Row,Column内で使用するとExpanded内の子要素が自身の幅に応じて柔軟な比率で表示される
 Flexible ()
 
-///
+///Compose Plan Widget のデザイン決め
+<SingleChildScrollView Class
+//子要素が縦のデバイスの長さからはみ出した時にスクロールできるようになる。
+SingleChildScrollView()
+<Form Class
+Form(
+  //keyを指定してFormを識別する
+  key: _formKey,
+  child: Column()
+);
+//複数のField Widgetをグループ化できる。
+<TextFormField Class
+TextFormField(
+  //fieldを装飾できる。
+  decoration: const InputDecoration(
+    icon: Icon(Icons.person),
+    hintText: 'What do people call you?',
+    labelText: 'Name *',
+  ),
+  //ボタンを押した時になどに使える
+  onSaved: (String value) {
+    // This optional block of code can be used to run
+    // code when the user saves the form.
+  },
+  //バリデーションを指定できる
+  validator: (String value) {
+    return value.contains('@') ? 'Do not use the @ char.' : null;
+  },
+)
+<CupertinoDatePicker Class
+CupertinoDatePicker(
+  //時間や日付のみを選択できる dateAndTimeは年は出ない
+  mode: CupertinoDatePickerMode.dateAndTime,
+  //２４時間表記ができる
+  use24hFormat: true,
+  //年の設定できる
+  minimumYear: 2019,
+  maximumYear: 2021,
+  //初期値の設定
+  initialDateTime: DateTime.now(),
+  //変更の検知
+  onDateTimeChanged: (DateTime newDateTime) {
+    // debugPrint(newDateTime);
+  },
+);
+<showCupertinoModalPopup Class
+//ios風の下からポップアップで表示できる
+showCupertinoModalPopup(
+  context: context,
+  builder: (BuildContext context) {}
+);
+///状態管理
+//hooks_riverpod, flutter_hooks
+//widget間のstate（状態）管理を助ける。
+//管理したいwidgetツリーの一番上部にProviderScopeをつける
+ProviderScope(child: MyApp());
+
+//flutter_state_notifier
+//freezed
