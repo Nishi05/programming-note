@@ -128,6 +128,9 @@ TextFormField(
   validator: (String value) {
     return value.contains('@') ? 'Do not use the @ char.' : null;
   },
+  //入力した値を随時監視できる　※ただし、StatefulWidgetで実装(2020/11/26)
+  //検索フォームやログインフォームで使えそう
+  onChanged: () =>,
 )
 <CupertinoDatePicker Class
 CupertinoDatePicker(
@@ -156,6 +159,21 @@ showCupertinoModalPopup(
 //widget間のstate（状態）管理を助ける。
 //管理したいwidgetツリーの一番上部にProviderScopeをつける
 ProviderScope(child: MyApp());
+//context.read(hogeProvider)
+//widgetで分離した時でも状態管理に参照できる
 
 //flutter_state_notifier
+//グローバル変数で宣言した時に初期値を入れるのがやりやすい。
 //freezed
+
+Text('${formState.dateTime}')
+
+//CupertinoButton Class
+//iOS風のボタン
+CupertinoButton(
+    minSize: 22.0,
+    onPressed: _incrementCounter,
+    color: Colors.blue,
+    padding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
+    child: Text("Hello", style: TextStyle(fontSize: 14.0, color: Colors.white)),
+),
