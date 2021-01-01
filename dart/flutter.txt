@@ -164,7 +164,9 @@ ProviderScope(child: MyApp());
 
 //flutter_state_notifier
 //グローバル変数で宣言した時に初期値を入れるのがやりやすい。
-//freezed
+//freezed コマンド
+flutter pub run build_runner build --delete-conflicting-outputs
+
 
 Text('${formState.dateTime}')
 
@@ -177,3 +179,47 @@ CupertinoButton(
     padding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
     child: Text("Hello", style: TextStyle(fontSize: 14.0, color: Colors.white)),
 ),
+//Datetimeを比べる　isBefore or isAfter
+var now = new DateTime.now();
+var earlier = now.subtract(const Duration(seconds: 5));
+assert(earlier.isBefore(now));
+
+///データ管理（APIなど）
+implements -> 関数の処理を実際に書く
+abstract  -> 処理は書かずにimplementにある関数の名前のみを書く。
+
+//data_source apiを直接叩く場所
+//repository data_sourceを呼ぶ場所
+なぜrepositoryの層を設けるのか？
+->　data_sourceを切り分ける事によりローカルデータやモックデータを扱いたい時に切り分けが簡単になる。
+
+//riverpodでfirestoreのplanデータを持ってくる流れ
+1. data_sourceにAPIを叩くコードを書く
+2. repositoryにdata_sourceを叩くコードを書く
+3. view_modelでrepositoryを使って実際のデータを管理する
+4.
+//firestoreの知見
+//FirebaseFireStore.instance
+<- firestoreを扱うときの最初の宣言
+
+//FirebaseFireStore.instance.collection("collectionName")
+<- Collectionを扱う時はcollectionを指定する。
+
+//FirebaseFireStore.instance.collection("collectionName").doc("documentIdName").get()
+<- doc()を指定すると、documentIdから中の値が取れる。*返り値はDocumentSnapshot
+
+//FirebaseFireStore.instance.collection("collectionName").get()
+<- Future(一度のデータ読み出し？)時にはget()を使う。*返り値はQuerySnapshot
+
+//FirebaseFireStore.instance.collection("collectionName").snapshots()
+<- Stream(リアルタイムでデータを更新？)時にはsnapshots()を使う。*返り値はQuerySnapshot
+
+//QueryDocumentSnapshot
+<- 複数のドキュメントのデータを持つQuerySnapshotから実際にデータを取得する際には、
+一つ一つのドキュメントのデータを持つQueryDocumentSnapshotに対して操作を行う。
+参考：https://qiita.com/muijp/items/86a4573fdce800221b72
+//fromJson Json -> map型に
+//toJson 値->Jsonに
+//QueryDocumentSnapshotとDocumentSnapshotの違い
+<- QueryDocumentSnapshotは値が存在するのが保証されており、exists()やget()をした時に必ず取れる。
+一方DocumentSnapshotはDocumentIDから所得するので、値が存在するかは保証されてない
