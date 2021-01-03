@@ -223,3 +223,12 @@ abstract  -> 処理は書かずにimplementにある関数の名前のみを書�
 //QueryDocumentSnapshotとDocumentSnapshotの違い
 <- QueryDocumentSnapshotは値が存在するのが保証されており、exists()やget()をした時に必ず取れる。
 一方DocumentSnapshotはDocumentIDから所得するので、値が存在するかは保証されてない
+
+// MediaQuery.of(context).sizeを使用すると、rebuildが走る
+
+///ユーザー管理の流れ
+1.emailとpasswordを入力する
+2.確認画面へ遷移して認証確認メールを送る
+3.ユーザーが確認リンクを押す
+4.認証画面を表示
+5.アプリへ戻り確認画面から自動でユーザー情報登録画面にいく
