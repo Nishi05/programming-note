@@ -246,3 +246,5 @@ auth系の状態管理を一通り書いておき、モデルの入れ替えで�
 
 ///Firebase Cloud Storage
 image_pickerでデバイスからのカメラ情報を持ってくる。
+
+//set関数で定義したmethodは〇〇.〇〇で参照できる
