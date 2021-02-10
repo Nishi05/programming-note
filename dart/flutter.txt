@@ -271,3 +271,5 @@ talkは予定参加した時のみできる
 とりあえず、文字のみ
 
 //M1macでの対応
+
+//Local Storage (Shared Preferences) を使うと端末に値を保存できる
